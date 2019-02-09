@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">GithubResume</string>
+    <string name="generate_now">Generate now</string>
+    <string name="enter_your_github">Enter your GitHub username and click generate now!</string>
+    <string name="username">username</string>
+    <string name="user_website">User website</string>
 </resources>

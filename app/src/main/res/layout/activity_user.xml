@@ -14,12 +14,13 @@
             android:id="@+id/login_tv"
             android:layout_marginTop="32dp"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:textSize="24sp"/>
     <Button
-            android:text="Button"
-            android:layout_width="wrap_content"
+            android:text="@string/user_website"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/webpage_bt" android:layout_marginTop="32dp"
             app:layout_constraintTop_toBottomOf="@+id/login_tv" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
+            android:layout_marginStart="@dimen/main_margin" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="@dimen/main_margin"/>
 </android.support.constraint.ConstraintLayout>
