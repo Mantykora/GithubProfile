@@ -1,8 +1,8 @@
 package com.rkazenas.githubresume.api
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
-data class UserData(
-     val login: String
-
-
-)
+@Parcelize
+data class UserData(val login: String,
+                    val html_url: String) : Parcelable
 
