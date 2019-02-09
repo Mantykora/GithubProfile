@@ -12,8 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
-import android.support.v4.view.accessibility.AccessibilityEventCompat.setAction
-
+import android.widget.TextView
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,12 +26,12 @@ class MainActivity : AppCompatActivity() {
         generate_bt.setOnClickListener {
             val userName = user_et.text
             generate_progress.visibility = View.VISIBLE
-            conectToApi(userName.trim().toString(), generate_bt)
+            connectToApi(userName.trim().toString(), generate_bt)
 
         }
     }
 
-    private fun conectToApi(userName: String, view: View) {
+    private fun connectToApi(userName: String, view: View) {
         fun <T> fetchSubscribe(
             observable: Observable<T>,
             onSuccess: (T) -> Unit,
@@ -55,11 +54,25 @@ class MainActivity : AppCompatActivity() {
             },
             onError = {
                 it.printStackTrace()
+                Log.d("message", it.message)
                 generate_progress.visibility = View.GONE
-
-                Snackbar.make(view, "Error in retrieving user data", Snackbar.LENGTH_LONG).show()
-
+                if (it.message == "HTTP 404 Not Found") {
+                    makeSnackbar(view, "Specified user does not exist")
+                } else if (it.message == "Unable to resolve host \"api.github.com\": No address associated with hostname") {
+                    makeSnackbar(view, "No internet connection")
+                } else {
+                    makeSnackbar(view, "Error in retrieving user data")
+                }
             }
         )
+    }
+
+    private fun makeSnackbar(view: View, text: String) {
+        val snackbar = Snackbar.make(view, text, Snackbar.LENGTH_LONG)
+
+        val mainTextView = snackbar.view.findViewById(android.support.design.R.id.snackbar_text) as TextView
+        mainTextView.textAlignment = View.TEXT_ALIGNMENT_CENTER
+
+        snackbar.show()
     }
 }
