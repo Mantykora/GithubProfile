@@ -13,6 +13,8 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import android.widget.TextView
+import retrofit2.HttpException
+import java.net.UnknownHostException
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,7 +29,6 @@ class MainActivity : AppCompatActivity() {
             val userName = user_et.text
             generate_progress.visibility = View.VISIBLE
             connectToApi(userName.trim().toString(), generate_bt)
-
         }
     }
 
@@ -54,11 +55,11 @@ class MainActivity : AppCompatActivity() {
             },
             onError = {
                 it.printStackTrace()
-                Log.d("message", it.message)
+                Log.e("message", it.message, it)
                 generate_progress.visibility = View.GONE
-                if (it.message == "HTTP 404 Not Found") {
+                if (it is HttpException) {
                     makeSnackbar(view, "Specified user does not exist")
-                } else if (it.message == "Unable to resolve host \"api.github.com\": No address associated with hostname") {
+                } else if (it is UnknownHostException) {
                     makeSnackbar(view, "No internet connection")
                 } else {
                     makeSnackbar(view, "Error in retrieving user data")
