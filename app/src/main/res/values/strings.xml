@@ -4,4 +4,6 @@
     <string name="enter_your_github">Enter your GitHub username and click generate now!</string>
     <string name="username">username</string>
     <string name="user_website">User website</string>
+    <string name="github_avatar">github avatar</string>
+    <string name="user">User</string>
 </resources>
